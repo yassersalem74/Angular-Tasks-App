@@ -2,16 +2,24 @@
   <div class="flex-1">
     <div class="btn btn-ghost text-xl">
       <a class="nav-link"
-      routerLink="/"
+        routerLink="/"
         routerLinkActive="active-route">Tasks App</a></div>
   </div>
   <div class="flex gap-3 pr-3">
+    @if(!authService.isLoggedIn()){
     <div class="btn btn-primary">
       <a class="nav-link" routerLink="/register">Sign-Up</a>
     </div>
+    }
+
+    @if(!authService.isLoggedIn()){
     <div class="btn btn-primary">
       <a class="nav-link" routerLink="/login">LogIn</a>
     </div>
-    <div class="btn btn-error text-white"><a>Logout</a></div>
+    }
+    @if(authService.isLoggedIn()){
+    <app-logout-button />
+    }
+
   </div>
 </div>
