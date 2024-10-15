@@ -1,0 +1,34 @@
+<div class="task-list p-5 bg-gray-100 rounded-lg shadow-lg">
+  @if(tasks.length === 0){
+  <div class="flex justify-center flex-col items-center">
+    <img src="/notasks.jpg" class="w-1/2" alt="no tasks to do">
+    <p class="font-bold text-2xl text-slate-600">No tasks to do..</p>
+  </div>
+
+  }
+  <ol class="list-decimal list-inside">
+
+    @for (task of tasks; track task) {
+    <li
+      class="task-item p-4 mb-4 bg-white rounded-lg shadow-md flex justify-between"
+      [ngClass]="{'bg-green-400': task.status === 'completed'}">
+      <div class="task-title text-lg font-semibold"
+        [ngClass]="{'line-through': task.status === 'completed'}">
+        {{ task.title }}
+      </div>
+      <div class="task-actions mt-2 flex space-x-2">
+        <button (click)="deleteTask(task.id)"
+          class="btn btn-danger px-3 py-1 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+          Delete
+        </button>
+        @if(task.status !== 'completed'){
+        <button (click)="completeTask(task)"
+          class="btn btn-success px-3 py-1 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+          Complete
+        </button>
+        }
+      </div>
+    </li>
+    }
+  </ol>
+</div>
